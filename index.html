@@ -18,7 +18,8 @@
     --line-soft: #202029;
     --text: #eeecf5;
     --text-dim: #9c99ac;
-    --text-faint: #6b687c;
+    --text-faint: #8e8ba0;
+    --line-strong: #6b687c; /* 3:1 boundary for form controls */
 
     --gold: #ffc72c;
 
@@ -106,6 +107,7 @@
     color: var(--text-faint);
     text-align:right;
     max-width: 280px;
+    display:flex; flex-direction:column; align-items:flex-end; gap:8px;
   }
 
   section.block{ margin-bottom: 34px; }
@@ -169,6 +171,7 @@
     margin-bottom: 14px;
   }
   .station-name{
+    margin:0;
     font-family: var(--font-display);
     font-weight:700;
     font-size: 18px;
@@ -190,7 +193,7 @@
   .switch input{ position:absolute; opacity:0; width:1px; height:1px; }
   .switch .track{
     width:36px; height:20px; border-radius: 100px; background: var(--bg-panel-2);
-    border: 1px solid var(--line); position:relative; transition: background .2s, border-color .2s;
+    border: 1px solid var(--line-strong); position:relative; transition: background .2s, border-color .2s;
   }
   .switch .knob{
     position:absolute; top:1px; left:1px; width:16px; height:16px; border-radius:50%;
@@ -206,11 +209,11 @@
   .dial-wrap{ display:flex; justify-content:center; margin: 4px 0 6px; }
   .dial-svg{ width: 190px; height: 128px; overflow:visible; }
   .dial-arc{ fill:none; stroke: var(--line); stroke-width:2; }
-  .dial-tick{ fill: var(--bg-panel-2); stroke: var(--line); stroke-width:1.5; cursor:pointer; transition: fill .2s, stroke .2s; }
+  .dial-tick{ fill: var(--bg-panel-2); stroke: var(--line-strong); stroke-width:1.5; transition: fill .2s, stroke .2s; }
   .station.alice .dial-tick.active{ fill: var(--alice); stroke: var(--alice); }
   .station.bob .dial-tick.active{ fill: var(--bob); stroke: var(--bob); }
   .station.eve .dial-tick.active{ fill: var(--eve); stroke: var(--eve); }
-  .dial-label{ fill: var(--text-faint); font-family: var(--font-mono); font-size: 12px; cursor:pointer; transition: fill .2s; }
+  .dial-label{ fill: var(--text-faint); font-family: var(--font-mono); font-size: 12px; transition: fill .2s; }
   .dial-label.active{ fill: var(--text); font-weight:600; }
   .dial-needle line{ stroke: var(--gold); stroke-width: 3; stroke-linecap: round; }
   .dial-needle{ transition: transform .45s cubic-bezier(.2,.9,.25,1.2); }
@@ -218,11 +221,12 @@
 
   .pill-row{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom: 14px; }
   .pill{
+    min-height: 32px;
     font-family: var(--font-mono);
     font-size: 12px;
     padding: 6px 11px;
     border-radius: 100px;
-    border: 1px solid var(--line);
+    border: 1px solid var(--line-strong);
     background: var(--bg-panel-2);
     color: var(--text-dim);
     cursor:pointer;
@@ -252,7 +256,7 @@
   .fire-btn-wrap{ display:flex; flex-direction:column; align-items:center; gap:6px; }
   .fire-btn{
     width: 86px; height: 86px; border-radius: 50%;
-    background: linear-gradient(180deg, var(--alice), #1c6a38);
+    background: linear-gradient(180deg, #237a42, #1a5e33);
     border: 3px solid #123821;
     box-shadow: 0 6px 0 #123821, 0 10px 18px rgba(47,158,86,.35);
     color:#fff; font-family: var(--font-display); font-weight:700; font-size: 13px; letter-spacing:.04em;
@@ -262,7 +266,7 @@
   .fire-btn:hover{ filter:brightness(1.06); }
   .fire-btn:active{ transform: translateY(4px); box-shadow: 0 2px 0 #123821, 0 4px 10px rgba(47,158,86,.35); }
   .fire-btn:disabled{ opacity:.4; cursor:not-allowed; box-shadow:none; transform:none; }
-  .fire-hint{ font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); text-transform:uppercase; letter-spacing:.08em; }
+  .fire-hint{ font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); text-transform:uppercase; letter-spacing:.08em; }
 
   /* detectors (Bob + Eve) */
   .detector{
@@ -338,7 +342,7 @@
     opacity:.4;
   }
   .tag-pill{
-    font-family: var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing:.08em; text-transform:uppercase;
     border-radius:100px; padding: 3px 10px; border:1px solid; white-space:nowrap;
   }
   .tag-alice{ color: var(--alice-bright); background: var(--alice-dim); border-color: var(--alice); }
@@ -418,7 +422,7 @@
   .field select, .field input[type="number"]{
     width:100%;
     background: var(--bg-panel-2);
-    border: 1px solid var(--line);
+    border: 1px solid var(--line-strong);
     color: var(--text);
     border-radius: var(--radius-sm);
     padding: 9px 10px;
@@ -437,7 +441,7 @@
     letter-spacing:.04em;
     padding: 10px 18px;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--line);
+    border: 1px solid var(--line-strong);
     background: var(--bg-panel-2);
     color: var(--text);
     cursor:pointer;
@@ -487,7 +491,7 @@
     font-size: 13px;
   }
   .log-trunc-notice.show{ display:block; }
-  .stat .label{ font-family: var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color: var(--text-faint); margin-bottom:6px; }
+  .stat .label{ font-family: var(--font-mono); font-size: 11px; text-transform:uppercase; letter-spacing:.06em; color: var(--text-faint); margin-bottom:6px; }
   .stat .value{ font-family: var(--font-display); font-size: 22px; font-weight:700; }
   .stat.warn .value{ color: var(--eve-bright); }
   .stat.ok .value{ color: var(--beam); }
@@ -507,7 +511,7 @@
   .key-row + .key-row{ border-top: 1px dashed var(--line-soft); }
   .row-label{ flex: 0 0 64px; display:flex; flex-direction:column; line-height:1.3; padding-top:1px; }
   .row-label .who{ font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:.04em; }
-  .row-label .what{ font-size:10px; color: var(--text-faint); text-transform:uppercase; letter-spacing:.05em; }
+  .row-label .what{ font-size: 11px; color: var(--text-faint); text-transform:uppercase; letter-spacing:.05em; }
   .row-bits{ flex:1; word-break: break-all; padding-top:1px; }
   .key-row.alice-row .who,
   .key-row.alice-row .row-bits{ color: var(--alice-bright); }
@@ -516,7 +520,7 @@
   /* a base mismatch means this position is discarded during sifting */
   .row-bits .bit-unused{ color: var(--text-faint); }
   /* a bit mismatch after sifting is a real error in the shared key */
-  .row-bits .bit-error{ color: #ff5b6b; font-weight:700; }
+  .row-bits .bit-error{ color: #ff5b6b; font-weight:700; text-decoration: underline wavy; text-underline-offset: 3px; }
   .alert-banner{
     margin-top:12px;
     border: 1px solid var(--eve);
@@ -587,6 +591,104 @@
   }
   footer a{ color: var(--text-dim); text-decoration: underline dotted; }
 
+  .short-text{ display:none; }
+  .lbl-short, .speed-cycle, .send-slot-mobile{ display:none; }
+  body.compact .lbl-full{ display:none; }
+  body.compact .lbl-short{ display:inline; }
+
+  /* ================= Mobile (compact) layout ================= */
+  body.compact .wrap{ padding: 12px 8px 40px; }
+  body.compact .topbar{ padding-bottom: 12px; margin-bottom: 14px; gap: 10px; }
+  body.compact .brand{ gap:10px; }
+  body.compact .brand img{ height: 22px; }
+  body.compact .brand .divider{ display:none; }
+  body.compact .brand{ flex-wrap: wrap; }
+  body.compact .titleblock h1{ font-size: 18px; }
+  body.compact .topbar-meta{ max-width:none; width:100%; flex-direction:row; justify-content:space-between; align-items:center; }
+  body.compact section.block{ margin-bottom: 20px; }
+  body.compact .section-head{ margin-bottom: 8px; }
+  body.compact .section-head h2{ font-size: 13px; }
+
+  /* three narrow stations side by side, at any screen width */
+  body.compact .bench{ grid-template-columns: repeat(3, minmax(0,1fr)); gap: 6px; align-items: stretch; }
+  /* stations become columns whose indicator rows sit on a shared baseline at the bottom */
+  body.compact .station{ display:flex; flex-direction:column; }
+  body.compact #eveOnBlock{ display:flex; flex-direction:column; flex:1; }
+  body.compact .station .detector{ margin-top:auto; }
+  body.compact .station,
+  body.compact .station.eve{ padding: 10px 5px 8px; border-radius: 10px; }
+  body.compact .station-head{ margin-bottom: 8px; }
+  body.compact .station-name{ font-size: 15px; }
+  body.compact .station-role,
+  body.compact .dial-wrap,
+  body.compact .station-note,
+  body.compact .fire-hint,
+  body.compact .full-text{ display:none; }
+  body.compact .short-text{ display:inline; }
+
+  body.compact .pill-row{
+    display:grid; grid-template-columns: 1fr 1fr; gap:3px; margin-bottom: 8px;
+  }
+  body.compact #alicePills{ grid-template-columns: repeat(4, 1fr); }
+  body.compact .pill{ padding: 4px 0; }
+  body.compact .pill{ min-height: 30px; padding: 4px 2px; font-size: 12px; text-align:center; justify-content:center; }
+  body.compact .pill.rand{ grid-column: 1 / -1; }
+
+  body.compact .detector{
+    background:none; border:none; padding:0; margin-top: 2px;
+    gap: 4px; align-items:center;
+  }
+  body.compact .fire-btn-wrap{ flex: 0 0 auto; }
+  body.compact .fire-btn{
+    width: auto; padding: 0 18px; height: 42px; border-radius: 10px; white-space: nowrap;
+    font-size: 13px; box-shadow: 0 3px 0 #123821;
+  }
+  body.compact .fire-btn br{ display:none; }
+  body.compact .fire-btn:active{ transform: translateY(2px); box-shadow: 0 1px 0 #123821; }
+  body.compact .led .bulb,
+  body.compact .basis-square{ width: 26px; height: 26px; font-size: 13px; border-width: 1.5px; }
+  body.compact .basis-square{ font-size: 15px; border-radius: 6px; }
+  body.compact .led .bulb.lit-0, body.compact .led .bulb.lit-1{ box-shadow: 0 0 10px 2px rgba(255,255,255,.18); }
+
+  body.compact .eve-off{ padding: 4px 0; }
+  body.compact .eve-off .dash-box{ padding: 10px 4px; }
+
+  body.compact .speed-toggle-wrap{
+    margin-top: 10px; padding-top: 10px; gap: 10px;
+    flex-wrap: nowrap; justify-content: space-between;
+  }
+  body.compact #speedPills{ display:none; }
+  body.compact .speed-label{ font-size: 11px; }
+  body.compact .speed-cycle{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width: 76px; min-height: 42px; padding: 4px 12px;
+    background: var(--bg-panel-2); color: var(--text);
+  }
+  body.compact .speed-cycle::after{ content:"↻"; color: var(--beam); margin-left: 6px; }
+  body.compact .send-slot-mobile{ display:block; margin-left:auto; }
+
+  /* the beam sketch shrinks so it sits right under the stations */
+  body.compact .beam-rail{ height: 48px; margin-bottom: 18px; }
+  body.compact .beam-rail .tag-pill{ display:none; }
+  body.compact .detector-icon{ width: 24px; height: 46px; }
+  body.compact .detector-basis{ font-size: 16px; }
+  body.compact .beam-photon{ width: 30px; height: 30px; }
+  body.compact .beam-photon .glyph{ font-size: 18px; }
+
+  body.compact .console{ padding: 12px; }
+  body.compact .console-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+  body.compact .analysis-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
+  body.compact .stat{ padding: 10px 12px; }
+  body.compact .stat .value{ font-size: 19px; }
+  body.compact .key-row{ font-size: 12px; gap: 8px; }
+  body.compact .row-label{ flex-basis: 50px; }
+  body.compact .logs-grid{ grid-template-columns: 1fr; }
+  body.compact footer{ flex-direction: column; }
+
+  .sr-only{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
   @media (prefers-reduced-motion: reduce){
     *{ transition: none !important; animation: none !important; }
   }
@@ -598,14 +700,21 @@
   <header class="topbar">
     <div class="brand">
       <a class="brand-link" href="https://uwaterloo.ca/institute-for-quantum-computing/outreach/quantum-educators/teacher-resources" target="_blank" rel="noopener">
-        <img src="assets/logo.png" alt="University of Waterloo — Institute for Quantum Computing">
+        <img src="assets/logo.png" alt="University of Waterloo Institute for Quantum Computing — teacher resources (opens in a new tab)">
       </a>
       <div class="divider"></div>
       <div class="titleblock">
         <h1>Quantum Key Distribution Simulator</h1>
       </div>
     </div>
-    <div class="topbar-meta" id="topbarMeta">BB84 Polarization Protocol</div>
+    <div class="topbar-meta" id="topbarMeta">
+      <div>BB84 Protocol</div>
+      <label class="switch layout-switch">
+        <span>Mobile layout</span>
+        <input type="checkbox" id="compactToggle" role="switch" aria-label="Mobile layout">
+        <span class="track"><span class="knob"></span></span>
+      </label>
+    </div>
   </header>
 
   <!-- ============ BENCH ============ -->
@@ -617,23 +726,23 @@
       <div class="station alice">
         <div class="station-head">
           <div>
-            <div class="station-name">Alice</div>
+            <h3 class="station-name">Alice</h3>
             <div class="station-role">State preparation</div>
           </div>
         </div>
 
         <div class="dial-wrap"><div id="aliceDial"></div></div>
-        <div class="pill-row" id="alicePills"></div>
+        <div class="pill-row" id="alicePills" role="group" aria-label="Alice's state"></div>
         <div class="station-note" id="aliceNote">Sending <strong>H</strong> · basis H/V</div>
 
         <div class="detector">
-          <div class="fire-btn-wrap">
-            <button class="fire-btn" id="sendBtn">SEND<br>PHOTON</button>
+          <div class="fire-btn-wrap" id="fireBtnWrap">
+            <button class="fire-btn" id="sendBtn">SEND <br>PHOTON</button>
             <span class="fire-hint">pulse switch</span>
           </div>
-          <div class="led"><div class="basis-square alice-square" id="aliceBasisSquare">+</div></div>
-          <div class="led"><div class="bulb alice-bulb" id="aliceLed0">0</div></div>
-          <div class="led"><div class="bulb alice-bulb" id="aliceLed1">1</div></div>
+          <div class="led" aria-hidden="true"><div class="basis-square alice-square" id="aliceBasisSquare">+</div></div>
+          <div class="led" aria-hidden="true"><div class="bulb alice-bulb" id="aliceLed0">0</div></div>
+          <div class="led" aria-hidden="true"><div class="bulb alice-bulb" id="aliceLed1">1</div></div>
         </div>
       </div>
 
@@ -641,27 +750,27 @@
       <div class="station eve">
         <div class="station-head">
           <div>
-            <div class="station-name">Eve?</div>
+            <h3 class="station-name">Eve?</h3>
             <div class="station-role">Disruptive measurement</div>
           </div>
           <label class="switch eve-switch">
-            <input type="checkbox" id="eveToggle">
+            <input type="checkbox" id="eveToggle" role="switch" aria-label="Include eavesdropper Eve">
             <span class="track"><span class="knob"></span></span>
           </label>
         </div>
 
         <div id="eveOnBlock" style="display:none;">
           <div class="dial-wrap"><div id="eveDial"></div></div>
-          <div class="pill-row" id="evePills"></div>
+          <div class="pill-row" id="evePills" role="group" aria-label="Eve's measurement basis"></div>
           <div class="station-note" id="eveNote">Measuring in H/V</div>
           <div class="detector">
-            <div class="led"><div class="basis-square eve-square" id="eveBasisSquare">+</div></div>
-            <div class="led"><div class="bulb eve-bulb" id="eveLed0">0</div></div>
-            <div class="led"><div class="bulb eve-bulb" id="eveLed1">1</div></div>
+            <div class="led" aria-hidden="true"><div class="basis-square eve-square" id="eveBasisSquare">+</div></div>
+            <div class="led" aria-hidden="true"><div class="bulb eve-bulb" id="eveLed0">0</div></div>
+            <div class="led" aria-hidden="true"><div class="bulb eve-bulb" id="eveLed1">1</div></div>
           </div>
         </div>
         <div id="eveOffBlock" class="eve-off">
-          <div class="dash-box">no eavesdropper<br>on the channel</div>
+          <div class="dash-box"><span class="full-text">no eavesdropper<br>on the channel</span><span class="short-text">no Eve</span></div>
         </div>
       </div>
 
@@ -669,30 +778,33 @@
       <div class="station bob">
         <div class="station-head">
           <div>
-            <div class="station-name">Bob</div>
+            <h3 class="station-name">Bob</h3>
             <div class="station-role">State measurement</div>
           </div>
         </div>
 
         <div class="dial-wrap"><div id="bobDial"></div></div>
-        <div class="pill-row" id="bobPills"></div>
+        <div class="pill-row" id="bobPills" role="group" aria-label="Bob's measurement basis"></div>
         <div class="station-note" id="bobNote">Measuring in H/V</div>
 
         <div class="detector">
-          <div class="led"><div class="basis-square bob-square" id="bobBasisSquare">+</div></div>
-          <div class="led"><div class="bulb bob-bulb" id="led0">0</div></div>
-          <div class="led"><div class="bulb bob-bulb" id="led1">1</div></div>
+          <div class="led" aria-hidden="true"><div class="basis-square bob-square" id="bobBasisSquare">+</div></div>
+          <div class="led" aria-hidden="true"><div class="bulb bob-bulb" id="led0">0</div></div>
+          <div class="led" aria-hidden="true"><div class="bulb bob-bulb" id="led1">1</div></div>
         </div>
       </div>
     </div>
 
     <div class="speed-toggle-wrap">
-      <span class="speed-label">Animation speed</span>
-      <div class="pill-row" id="speedPills"></div>
+      <span class="speed-label"><span class="full-text">Animation speed</span><span class="short-text">Speed</span></span>
+      <div class="pill-row" id="speedPills" role="group" aria-label="Animation speed"></div>
+      <button type="button" class="pill speed-cycle" id="speedCycle" aria-label="Animation speed: Medium. Tap to change.">Medium</button>
+      <div class="send-slot-mobile" id="sendSlotMobile"></div>
     </div>
   </section>
 
   <!-- ============ BEAM RAIL ============ -->
+  <div class="sr-only" id="srAnnounce" aria-live="polite" aria-atomic="true"></div>
   <div class="beam-rail" aria-hidden="true">
     <div class="beam-line"></div>
 
@@ -727,7 +839,7 @@
         <div class="field">
           <label for="autoAlice">Alice's setting</label>
           <select id="autoAlice">
-            <option value="RANDOM" selected>Random each qubit</option>
+            <option value="RANDOM" selected data-full="Random each qubit" data-short="Random">Random each qubit</option>
             <option value="H">H (Z0)</option>
             <option value="D">+45° (X0)</option>
             <option value="V">V (Z1)</option>
@@ -737,7 +849,7 @@
         <div class="field">
           <label for="autoBob">Bob's basis</label>
           <select id="autoBob">
-            <option value="RANDOM" selected>Random each qubit</option>
+            <option value="RANDOM" selected data-full="Random each qubit" data-short="Random">Random each qubit</option>
             <option value="HV">H / V (Z)</option>
             <option value="DA">±45° (X)</option>
           </select>
@@ -752,7 +864,7 @@
         <div class="field">
           <label for="autoEveBasis">Eve's basis</label>
           <select id="autoEveBasis" disabled>
-            <option value="RANDOM" selected>Random each qubit</option>
+            <option value="RANDOM" selected data-full="Random each qubit" data-short="Random">Random each qubit</option>
             <option value="HV">H / V (Z)</option>
             <option value="DA">±45° (X)</option>
           </select>
@@ -767,8 +879,8 @@
       </div>
       <div class="console-actions">
         <button class="btn primary" id="runAuto">▶ Run sequence</button>
-        <div class="progress"><i id="autoProgress"></i></div>
-        <span class="console-status" id="autoStatus">idle</span>
+        <div class="progress" id="autoProgressBar" role="progressbar" aria-label="Sequence progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="autoProgress"></i></div>
+        <span class="console-status" id="autoStatus" role="status">idle</span>
       </div>
     </div>
   </section>
@@ -778,21 +890,21 @@
     <div class="section-head">
       <span class="num">03</span><h2>Sifted key &amp; error check</h2>
       <span class="spacer"></span>
-      <span class="console-status" id="analysisToggleLabel">visible</span>
+      <span class="console-status" id="analysisToggleLabel" aria-hidden="true">visible</span>
       <label class="switch">
-        <input type="checkbox" id="analysisToggle" checked>
+        <input type="checkbox" id="analysisToggle" role="switch" aria-label="Show sifted key and error check" aria-controls="analysisBody" checked>
         <span class="track"><span class="knob"></span></span>
       </label>
     </div>
     <div id="analysisBody">
       <div class="analysis-grid">
-        <div class="stat clear-slot"><button class="btn btn-sm" id="clearLog2">Clear log</button></div>
+        <div class="stat clear-slot"><button class="btn btn-sm" id="clearLog2" aria-label="Clear log (sent photons, keys and session logs)">Clear log</button></div>
         <div class="stat"><div class="label">Photons sent</div><div class="value" id="statSent">0</div></div>
         <div class="stat"><div class="label">Bases matched</div><div class="value" id="statMatched">0</div></div>
         <div class="stat ok"><div class="label">Sifted key length</div><div class="value" id="statSifted">0</div></div>
         <div class="stat" id="statErrCard"><div class="label">Error rate (QBER)</div><div class="value" id="statError">—</div></div>
       </div>
-      <div class="log-trunc-notice" id="logTruncNotice">Log limit exceeded. Only the most recent 200 bits will be displayed.</div>
+      <div class="log-trunc-notice" id="logTruncNotice" role="status">Log limit exceeded. Only the most recent 200 bits will be displayed.</div>
       <div class="key-table">
         <div class="key-group">
           <div class="key-row alice-row"><div class="row-label"><span class="who">Alice</span><span class="what">Raw</span></div><div class="row-bits" id="aliceRawBits">no photons sent yet</div></div>
@@ -803,7 +915,7 @@
           <div class="key-row bob-row"><div class="row-label"><span class="who">Bob</span><span class="what">Sifted</span></div><div class="row-bits" id="bobSiftedBits">no bases compared yet</div></div>
         </div>
       </div>
-      <div class="alert-banner" id="eveAlert">⚠ Errors have appeared in the sifted key. In a real BB84 exchange this signals interference on the channel — possibly an eavesdropper — and Alice and Bob would discard this key rather than use it.</div>
+      <div class="alert-banner" id="eveAlert" role="status"><span aria-hidden="true">⚠ </span>Errors have appeared in the sifted key.</div>
     </div>
   </section>
 
@@ -825,7 +937,7 @@
         </div>
         <div class="terminal-foot">
           <span class="console-status">alice_log.csv</span>
-          <button class="btn" id="dlAlice" disabled>⭳ Download CSV</button>
+          <button class="btn" id="dlAlice" aria-label="Download Alice's log as CSV" disabled><span aria-hidden="true">⭳ </span>Download CSV</button>
         </div>
       </div>
       <div class="terminal">
@@ -838,14 +950,14 @@
         </div>
         <div class="terminal-foot">
           <span class="console-status">bob_log.csv</span>
-          <button class="btn" id="dlBob" disabled>⭳ Download CSV</button>
+          <button class="btn" id="dlBob" aria-label="Download Bob's log as CSV" disabled><span aria-hidden="true">⭳ </span>Download CSV</button>
         </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <span>Modelled on <a href="https://uwaterloo.ca/institute-for-quantum-computing/outreach/quantum-educators/teacher-resources" target="_blank" rel="noopener"><em>Build Your Own Quantum Key Distribution</em></a>, IQC Scientific Outreach Team, University of Waterloo.</span>
+    <span>Modelled on <a href="https://uwaterloo.ca/institute-for-quantum-computing/outreach/quantum-educators/teacher-resources" target="_blank" rel="noopener"><em>Build Your Own Quantum Key Distribution</em><span class="sr-only"> (opens in a new tab)</span></a>, IQC Scientific Outreach Team, University of Waterloo.</span>
     <span>Simulator, not cryptographically secure.</span>
   </footer>
 </div>
@@ -921,6 +1033,8 @@
     container.innerHTML = '';
     const w = 190, h = 128, cx = 95, cy = 116, r = 82, tickR = 66, labelR = 100;
     const svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
     svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
     svg.setAttribute('class', 'dial-svg');
 
@@ -991,9 +1105,9 @@
     bobBasis: 'HV',
     eveEnabled: false,
     eveBasis: 'HV',
-    aliceRandom: false,
-    bobRandom: false,
-    eveRandom: false,
+    aliceRandom: true,
+    bobRandom: true,
+    eveRandom: true,
     speedFactor: 1,
     log: [],            // sliding window of at most MAX_LOG recent records (for display only)
     totalSent: 0,       // true cumulative counts — never trimmed
@@ -1037,9 +1151,11 @@
   }
 
   aliceDial.setKey('H');
-  setBobBasisDial('HV');
-  setEveBasisDial('HV');
-  setAliceIndicator('H');
+  // nothing has been sent yet and all three default to Random,
+  // so the basis indicators start blank rather than implying a setting
+  aliceDial.setKey('H'); bobDial.setKey('HV'); eveDial.setKey('HV');
+  [detectorBasisIcon, eveDetectorBasisIconRail, bobBasisSquare, eveBasisSquare, aliceBasisSquare]
+    .forEach(el => { el.textContent = ''; });
 
   /* ---- pill rows ---- */
   function buildPills(container, options, onPick){
@@ -1048,22 +1164,33 @@
       const b = document.createElement('button');
       b.className = 'pill' + (opt.rand ? ' rand' : '');
       b.type = 'button';
-      b.textContent = opt.label;
+      if (opt.rand){
+        b.textContent = 'Random';
+      } else if (opt.short){
+        b.innerHTML = `<span class="lbl-full" aria-hidden="true">${opt.label}</span><span class="lbl-short" aria-hidden="true">${opt.short}</span>`;
+        b.setAttribute('aria-label', opt.aria || opt.label);
+      } else {
+        b.textContent = opt.label;
+        if (opt.aria) b.setAttribute('aria-label', opt.aria);
+      }
+      b.setAttribute('aria-pressed', 'false');
       b.addEventListener('click', () => onPick(opt.key));
       container.appendChild(b);
     });
     return {
       refresh(activeKey){
         [...container.children].forEach((el, i) => {
-          el.classList.toggle('active', options[i].key === activeKey);
+          const on = options[i].key === activeKey;
+          el.classList.toggle('active', on);
+          el.setAttribute('aria-pressed', on ? 'true' : 'false');
         });
       }
     };
   }
 
   const alicePills = buildPills(document.getElementById('alicePills'), [
-    { key:'H', label:'H' }, { key:'D', label:'+45°' }, { key:'V', label:'V' },
-    { key:'A', label:'−45°' }, { key:'RANDOM', label:'🎲 Random', rand:true }
+    { key:'H', label:'H', aria:'horizontal' }, { key:'D', label:'+45°', short:'+', aria:'plus 45 degrees' }, { key:'V', label:'V', aria:'vertical' },
+    { key:'A', label:'−45°', short:'−', aria:'minus 45 degrees' }, { key:'RANDOM', label:'Random', rand:true }
   ], (key) => {
     if (key === 'RANDOM'){ state.aliceRandom = true; }
     else { state.aliceRandom = false; state.aliceKey = key; aliceDial.setKey(key); setAliceIndicator(key); }
@@ -1071,7 +1198,7 @@
   });
 
   const bobPills = buildPills(document.getElementById('bobPills'), [
-    { key:'HV', label:'H/V' }, { key:'DA', label:'±45°' }, { key:'RANDOM', label:'🎲 Random', rand:true }
+    { key:'HV', label:'H/V', aria:'horizontal and vertical' }, { key:'DA', label:'±45°', aria:'plus or minus 45 degrees' }, { key:'RANDOM', label:'Random', rand:true }
   ], (key) => {
     if (key === 'RANDOM'){ state.bobRandom = true; }
     else { state.bobRandom = false; state.bobBasis = key; setBobBasisDial(key); }
@@ -1079,20 +1206,29 @@
   });
 
   const evePills = buildPills(document.getElementById('evePills'), [
-    { key:'HV', label:'H/V' }, { key:'DA', label:'±45°' }, { key:'RANDOM', label:'🎲 Random', rand:true }
+    { key:'HV', label:'H/V', aria:'horizontal and vertical' }, { key:'DA', label:'±45°', aria:'plus or minus 45 degrees' }, { key:'RANDOM', label:'Random', rand:true }
   ], (key) => {
     if (key === 'RANDOM'){ state.eveRandom = true; }
     else { state.eveRandom = false; state.eveBasis = key; setEveBasisDial(key); }
     refreshAll();
   });
 
-  const speedPills = buildPills(document.getElementById('speedPills'), [
-    { key:'SLOW', label:'Slow' }, { key:'MEDIUM', label:'Medium' }, { key:'FAST', label:'Fast' }
-  ], (key) => {
+  const SPEED_NAMES = { SLOW:'Slow', MEDIUM:'Medium', FAST:'Fast' };
+  const SPEED_CYCLE = { MEDIUM:'FAST', FAST:'SLOW', SLOW:'MEDIUM' };
+  let speedKey = 'MEDIUM';
+  const speedCycleBtn = document.getElementById('speedCycle');
+  function setSpeed(key){
+    speedKey = key;
     state.speedFactor = key === 'FAST' ? 2 : (key === 'SLOW' ? 0.5 : 1);
     speedPills.refresh(key);
-  });
-  speedPills.refresh('MEDIUM');
+    speedCycleBtn.textContent = SPEED_NAMES[key];
+    speedCycleBtn.setAttribute('aria-label', `Animation speed: ${SPEED_NAMES[key]}. Tap to change.`);
+  }
+  const speedPills = buildPills(document.getElementById('speedPills'), [
+    { key:'SLOW', label:'Slow' }, { key:'MEDIUM', label:'Medium' }, { key:'FAST', label:'Fast' }
+  ], setSpeed);
+  speedCycleBtn.addEventListener('click', () => setSpeed(SPEED_CYCLE[speedKey]));
+  setSpeed('MEDIUM');
 
   function refreshAll(){
     alicePills.refresh(state.aliceRandom ? 'RANDOM' : state.aliceKey);
@@ -1123,6 +1259,30 @@
     document.getElementById('eveNote').innerHTML = `Random → measured in <strong>${b.label}</strong> this round`;
   }
 
+  /* ---- mobile layout toggle ---- */
+  const compactToggle = document.getElementById('compactToggle');
+  const fireBtnWrap = document.getElementById('fireBtnWrap');
+  const aliceDetectorRow = fireBtnWrap.parentElement;
+  const sendSlotMobile = document.getElementById('sendSlotMobile');
+  function applyCompact(on){
+    document.body.classList.toggle('compact', on);
+    compactToggle.checked = on;
+    // Send Photon lives beside the speed control on mobile, inside Alice's panel on desktop
+    if (on) sendSlotMobile.appendChild(fireBtnWrap);
+    else aliceDetectorRow.insertBefore(fireBtnWrap, aliceDetectorRow.firstChild);
+    document.querySelectorAll('option[data-short]').forEach(o => {
+      o.textContent = on ? o.dataset.short : o.dataset.full;
+    });
+  }
+  let savedCompact = null;
+  try { savedCompact = localStorage.getItem('qkdCompactLayout'); } catch (e) {}
+  applyCompact(savedCompact !== null ? savedCompact === '1'
+                                     : window.matchMedia('(max-width: 700px)').matches);
+  compactToggle.addEventListener('change', () => {
+    applyCompact(compactToggle.checked);
+    try { localStorage.setItem('qkdCompactLayout', compactToggle.checked ? '1' : '0'); } catch (e) {}
+  });
+
   /* ---- eve toggle ---- */
   const eveToggle = document.getElementById('eveToggle');
   const eveOnBlock = document.getElementById('eveOnBlock');
@@ -1130,7 +1290,7 @@
   const beamEveMarker = document.getElementById('beamEveMarker');
   eveToggle.addEventListener('change', () => {
     state.eveEnabled = eveToggle.checked;
-    eveOnBlock.style.display = state.eveEnabled ? 'block' : 'none';
+    eveOnBlock.style.display = state.eveEnabled ? '' : 'none';
     eveOffBlock.style.display = state.eveEnabled ? 'none' : 'block';
     beamEveMarker.classList.toggle('show', state.eveEnabled);
     if (!state.eveEnabled) clearEveLed();
@@ -1164,14 +1324,19 @@
   const beamArrow = document.getElementById('beamArrow');
   const beamGlyph = document.getElementById('beamGlyph');
   const beamRail = document.querySelector('.beam-rail');
-  const TRAVEL_MARGIN = 64;
-  const END_MARGIN = 26; // shorter so the photon slides in behind Bob's detector before fading
+  // start just past Alice's laser; end inside Bob's detector so the photon slides in behind it
+  function travelMargins(){
+    return document.body.classList.contains('compact')
+      ? { start: 34, end: 16 }
+      : { start: 64, end: 26 };
+  }
 
   function playSinglePhoton(result, durationMs){
     return new Promise(resolve => {
       const railW = beamRail.getBoundingClientRect().width;
-      const startX = TRAVEL_MARGIN;
-      const endX = Math.max(startX + 10, railW - END_MARGIN);
+      const m = travelMargins();
+      const startX = m.start;
+      const endX = Math.max(startX + 10, railW - m.end);
       beamArrow.style.transition = 'none';
       beamArrow.style.left = startX + 'px';
       beamGlyph.style.color = 'var(--beam)';
@@ -1338,6 +1503,17 @@
     }
   }
 
+  /* ---------------- screen-reader announcements ---------------- */
+  const srAnnounce = document.getElementById('srAnnounce');
+  function announce(msg){
+    srAnnounce.textContent = '';
+    setTimeout(() => { srAnnounce.textContent = msg; }, 50);
+  }
+  function spokenBasis(b){ return b === 'HV' ? 'Z basis' : 'X basis'; }
+  function spokenAlice(key){
+    return { H:'horizontal', V:'vertical', D:'plus 45 degrees', A:'minus 45 degrees' }[key];
+  }
+
   /* ---------------- manual send ---------------- */
   const sendBtn = document.getElementById('sendBtn');
   sendBtn.addEventListener('click', async () => {
@@ -1372,6 +1548,10 @@
       eveIntercepted: !!result.eve, eveBit: result.eve ? result.eve.bit : null,
       bobBasis: result.bobBasis, bobBit: result.bobBit
     });
+    let msg = `Photon ${state.totalSent}: Alice sent ${spokenAlice(result.aliceKey)}, bit ${result.aliceBit}. `;
+    if (result.eve) msg += `Eve measured in the ${spokenBasis(result.eve.basis)} and got ${result.eve.bit}. `;
+    msg += `Bob measured in the ${spokenBasis(result.bobBasis)} and got ${result.bobBit}.`;
+    announce(msg);
     sendBtn.disabled = false;
   });
 
@@ -1400,6 +1580,7 @@
 
   const runBtn = document.getElementById('runAuto');
   const progressBar = document.getElementById('autoProgress');
+  const progressBarWrap = document.getElementById('autoProgressBar');
   const autoStatus = document.getElementById('autoStatus');
 
   function setControlsDisabled(disabled){
@@ -1447,14 +1628,20 @@
         });
         processed++;
       }
-      progressBar.style.width = ((processed / count) * 100).toFixed(1) + '%';
+      const pct = (processed / count) * 100;
+      progressBar.style.width = pct.toFixed(1) + '%';
+      progressBarWrap.setAttribute('aria-valuenow', Math.round(pct));
       if (processed < count) await new Promise(r => requestAnimationFrame(r));
     }
 
     autoStatus.textContent = `done — ${count} qubits exchanged`;
+    {
+      const q = state.totalMatched ? ((state.totalErrors/state.totalMatched)*100).toFixed(1) + ' percent' : 'not yet available';
+      announce(`Sequence finished: ${count} qubits exchanged. ${state.totalMatched} bases matched in total. Error rate ${q}.`);
+    }
     setControlsDisabled(false);
     state.running = false;
-    setTimeout(() => { progressBar.style.width = '0%'; }, 1200);
+    setTimeout(() => { progressBar.style.width = '0%'; progressBarWrap.setAttribute('aria-valuenow', 0); }, 1200);
   });
 
   function clearLog(){
