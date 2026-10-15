@@ -14,7 +14,8 @@ Fonts loaded over the network.
 
 1. Create a new repo (or use an existing one) and add these files at the root:
    - `index.html`
-   - `assets/logo.png`
+   - `assets/logo.png` (light theme)
+   - `assets/logo-white.png` (dark theme)
 2. Push to GitHub.
 3. In the repo, go to **Settings → Pages**, set **Source** to the `main` branch (root),
    and save.
