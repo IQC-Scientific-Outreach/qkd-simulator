@@ -716,6 +716,13 @@
   }
 
   .brand-link .logo-dark{ display:none; }
+  .skip-link{ position:absolute; left:8px; top:-48px; z-index:10; padding:8px 14px; border-radius:6px; text-decoration:none; }
+  .skip-link:focus{ top:8px; }
+  #main:focus{ outline:none; }
+  .terminal-body:focus-visible{ outline-offset:-3px; }
+  .skip-link{ background: var(--ink); color:#fff; }
+  /* unlit indicator outline at 3:1 against its panel (WCAG 1.4.11) */
+  .led .bulb{ border-color: var(--line-strong); }
   .topbar-switches{ display:flex; gap:16px; flex-wrap:wrap; justify-content:flex-end; }
 </style>
 <style id="themeDark" media="not all">
@@ -1411,6 +1418,14 @@
      Flattening it here restores the original dark arrangement:
      logo | title ........ BB84 Protocol  [switches]. */
   .topbar .brand-link .logo-light{ display:none; }
+  .skip-link{ position:absolute; left:8px; top:-48px; z-index:10; padding:8px 14px; border-radius:6px; text-decoration:none; }
+  .skip-link:focus{ top:8px; }
+  #main:focus{ outline:none; }
+  .terminal-body:focus-visible{ outline-offset:-3px; }
+  .skip-link{ background: var(--gold); color:#000; }
+  /* white text on Alice's green needs the darker shade to reach 4.5:1 */
+  .station.alice .pill.active{ background:#237a42; border-color:#237a42; }
+  .bulb.alice-bulb.lit-0, .bulb.alice-bulb.lit-1{ background:#237a42; border-color:#237a42; }
   .topbar .titleblock, .topbar .topbar-meta{ display:contents; }
   .topbar .brand-link{ order:1; }
   .topbar .brand-link img{ height: 34px; width:auto; }
@@ -1437,6 +1452,7 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to simulator</a>
 <div class="wrap">
 
   <header class="topbar">
@@ -1464,6 +1480,7 @@
     </div>
   </header>
 
+  <main id="main" tabindex="-1">
   <!-- ============ INTRODUCTION ============ -->
   <section class="block">
     <div class="section-head">
@@ -1694,7 +1711,7 @@
     <div class="logs-grid">
       <div class="terminal">
         <div class="terminal-head"><span>Alice — serial monitor</span><span id="aliceCount">0 rows</span></div>
-        <div class="terminal-body">
+        <div class="terminal-body" tabindex="0" role="region" aria-label="Alice's serial monitor log">
           <table class="logtable">
             <thead><tr><th>n</th><th>basis</th><th>bit sent</th></tr></thead>
             <tbody id="aliceRows"><tr class="empty-row"><td colspan="3">no photons sent yet</td></tr></tbody>
@@ -1707,7 +1724,7 @@
       </div>
       <div class="terminal">
         <div class="terminal-head"><span>Bob — serial monitor</span><span id="bobCount">0 rows</span></div>
-        <div class="terminal-body">
+        <div class="terminal-body" tabindex="0" role="region" aria-label="Bob's serial monitor log">
           <table class="logtable">
             <thead><tr><th>n</th><th>basis</th><th>bit measured</th></tr></thead>
             <tbody id="bobRows"><tr class="empty-row"><td colspan="3">no measurements yet</td></tr></tbody>
@@ -1720,6 +1737,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <footer>
     <span>Modelled on <a href="https://uwaterloo.ca/institute-for-quantum-computing/outreach/quantum-educators/teacher-resources" target="_blank" rel="noopener"><em>Build Your Own Quantum Key Distribution</em><span class="sr-only"> (opens in a new tab)</span></a> by the Scientific Outreach Team at the Institute for Quantum Computing (IQC), University of Waterloo.<br>The development of the user interface relied on artificial intelligence tools.  Please report any issues to iqc-outreach@uwaterloo.ca.</span>
