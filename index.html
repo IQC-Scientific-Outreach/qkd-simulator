@@ -121,6 +121,14 @@
   .brand-link img{ height: 42px; width:auto; display:block; }
 
   section.block{ margin-bottom: 26px; }
+  .intro-text{
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+    padding: 18px 18px 20px;
+    color: var(--ink); font-size: 14px; line-height: 1.6;
+  }
+  .intro-text p{ margin: 0 0 12px; }
+  .intro-text p:last-child{ margin-bottom: 0; }
   .section-head{
     display:flex;
     align-items:center;
@@ -687,6 +695,7 @@
   body.compact .beam-photon .glyph{ font-size: 18px; }
 
   body.compact .console{ padding: 12px; }
+  body.compact .intro-text{ padding: 12px; font-size: 13px; }
   body.compact .console-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
   body.compact .analysis-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
   body.compact .stat{ padding: 10px 12px; }
@@ -723,6 +732,24 @@
       </label>
     </div>
   </header>
+
+  <!-- ============ INTRODUCTION ============ -->
+  <section class="block">
+    <div class="section-head">
+      <span class="num">00</span><h2>Introduction</h2>
+      <span class="spacer"></span>
+      <span class="console-status" id="introToggleLabel" aria-hidden="true">hidden</span>
+      <label class="switch">
+        <input type="checkbox" id="introToggle" role="switch" aria-label="Show introduction" aria-controls="introBody">
+        <span class="track"><span class="knob"></span></span>
+      </label>
+    </div>
+    <div id="introBody" class="intro-text" style="display:none">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+  </section>
 
   <!-- ============ BENCH ============ -->
   <section class="block">
@@ -1301,6 +1328,15 @@
     eveOffBlock.style.display = state.eveEnabled ? 'none' : 'block';
     beamEveMarker.classList.toggle('show', state.eveEnabled);
     if (!state.eveEnabled) clearEveLed();
+  });
+
+  /* ---- introduction visibility toggle ---- */
+  const introToggle = document.getElementById('introToggle');
+  const introBody = document.getElementById('introBody');
+  const introToggleLabel = document.getElementById('introToggleLabel');
+  introToggle.addEventListener('change', () => {
+    introBody.style.display = introToggle.checked ? '' : 'none';
+    introToggleLabel.textContent = introToggle.checked ? 'visible' : 'hidden';
   });
 
   /* ---- analysis visibility toggle ---- */
