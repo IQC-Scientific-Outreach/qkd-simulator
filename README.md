@@ -12,10 +12,8 @@ Fonts loaded over the network.
 
 ## Host it on GitHub Pages
 
-1. Create a new repo (or use an existing one) and add these files at the root:
-   - `index.html`
-   - `assets/logo.png` (light theme)
-   - `assets/logo-white.png` (dark theme)
+1. Create a new repo (or use an existing one) and add `index.html` at the root. The
+   logos are embedded in the page, so no other files are needed.
 2. Push to GitHub.
 3. In the repo, go to **Settings → Pages**, set **Source** to the `main` branch (root),
    and save.
