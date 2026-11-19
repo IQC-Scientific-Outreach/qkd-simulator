@@ -8,10 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
-<!-- Two complete themes. Light (default) matches the companion IQC labs;
-     dark is the simulator's original look. Only one is active at a time:
+<!-- Two complete themes. Dark (default) is the simulator's original look;
+     light matches the companion IQC labs. Only one is active at a time:
      the inactive sheet carries media="not all". -->
-<style id="themeLight">
+<style id="themeLight" media="not all">
   /* Colour & type tokens. Kept as CSS custom properties so the "paper +
      crimson" identity shared with the companion Superposition and
      Measurement Lab and BB84 Worksheet stays consistent and easy to retune
@@ -725,7 +725,7 @@
   .led .bulb{ border-color: var(--line-strong); }
   .topbar-switches{ display:flex; gap:16px; flex-wrap:wrap; justify-content:flex-end; }
 </style>
-<style id="themeDark" media="not all">
+<style id="themeDark" media="all">
   :root{
     --bg: #0a0a0f;
     --bg-raised: #131319;
@@ -1444,9 +1444,9 @@
   (function(){
     var t = null;
     try { t = localStorage.getItem('qkdTheme'); } catch (e) {}
-    if (t === 'dark') {
-      document.getElementById('themeLight').media = 'not all';
-      document.getElementById('themeDark').media = 'all';
+    if (t === 'light') {
+      document.getElementById('themeLight').media = 'all';
+      document.getElementById('themeDark').media = 'not all';
     }
   })();
 </script>
@@ -1482,7 +1482,9 @@
 
   <main id="main" tabindex="-1">
   <!-- ============ INTRODUCTION ============ -->
-  <section class="block">
+  <!-- Hidden until the real introduction text replaces the placeholder:
+       remove the `hidden` attribute to bring the section back. -->
+  <section class="block" hidden>
     <div class="section-head">
       <span class="num">00</span><h2>Introduction</h2>
       <span class="spacer"></span>
